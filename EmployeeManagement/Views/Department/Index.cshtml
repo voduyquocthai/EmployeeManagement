@@ -1,0 +1,33 @@
+﻿@model EmployeeManagement.Models.Department
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>@Model.Name</h2>
+
+
+
+<table>
+    <tr>
+        <td>Name</td>
+    </tr>
+
+
+
+    @foreach (var con in Model.Employees)
+    {
+        <tr>
+            <td>@con.Name</td>
+        </tr>
+    }
+
+</table>
+
+
+
+
+
+
+
