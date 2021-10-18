@@ -4,7 +4,6 @@ namespace EmployeeManagement.Models
 {
     public class Employee : ModelBase
     {
-        public string Name { get; set; }
         public string Desc { get; set; }
     }
 

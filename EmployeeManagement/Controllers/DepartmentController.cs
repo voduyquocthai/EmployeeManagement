@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagement.Models;
 using EmployeeManagement.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace EmployeeManagement.Controllers
 {
@@ -21,44 +24,79 @@ namespace EmployeeManagement.Controllers
         public IActionResult Index()
         {
 
-            _departmentRepository.Insert(new Department()
+            var departments = _departmentRepository.GetAll();
+            ViewBag.list = departments;
+            return View();
+        }
+
+        public ActionResult Store()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Store(Department department)
+        {
+            if (ModelState.IsValid)
             {
-                Id = 12343,
-                Name = "real name",
-                Employees = new List<Employee>()
+                var count = _departmentRepository.SearchByName(department);
+                    
+                if (count != 0)
                 {
-                    new Employee()
-                    {
-                        Name = "Employee 1"
-                    }, new Employee()
-                    {
-                        Name = "Employee 1"
-                    }, new Employee()
-                    {
-                        Name = "Employee 1"
-                    }, new Employee()
-                    {
-                        Name = "Employee 1"
-                    }, new Employee()
-                    {
-                        Name = "Employee 1"
-                    }, new Employee()
-                    {
-                        Name = "Employee 1"
-                    }, new Employee()
-                    {
-                        Name = "Employee 1"
-                    }, new Employee()
-                    {
-                        Name = "Employee 1"
-                    },
+                    ViewBag.message = "This department already existing";
+                    return View();
                 }
-            });
+                department.Created = DateTime.Now;
+                department.Modified = DateTime.Now;
+                _departmentRepository.Insert(department);
+                return RedirectToAction("Index");
+            }
 
-            var item = _departmentRepository.GetById(12343);
+            ViewBag.message = "Insert Failed !";
+            return View();
+        }
 
+        public ActionResult Edit(int id)
+        {
+            var department = _departmentRepository.GetById(id);
+            return View(department);
+        }
 
-            return View(item);
+        [HttpPost]
+        // [MyCustomFilter]
+        public ActionResult Edit(Department department)
+        {
+            if (ModelState.IsValid)
+            {
+                var existDepartment = _departmentRepository.GetById(department.Id);
+                existDepartment.Name = department.Name;
+                existDepartment.Desc = department.Desc;
+                existDepartment.ParentId = department.ParentId;
+                existDepartment.Modified = DateTime.Now;
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.message = "Edit Failed !";
+            return View();
+        }
+
+        [HttpGet]
+        // [MyCustomFilter]
+        public ActionResult Delete(int id)
+        {
+            var department = _departmentRepository.GetById(id);
+            if (department != null)
+            {
+                _departmentRepository.Delete(department);
+            }
+
+            return RedirectToAction("Index");
         }
     }
+
+
+    // public class MyCustomFilter: ActionFilterAttribute
+    // {
+    // }
+
 }
