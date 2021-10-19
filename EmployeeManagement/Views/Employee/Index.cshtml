@@ -28,6 +28,10 @@
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Desc</th>
+                                    <th>Date of Birth</th>
+                                    <th>Years of Experience</th>
+                                    <th>Phone</th>
+                                    <th>Department</th>
                                     <th>Created_at</th>
                                     <th>Updated_at</th>
                                     <th>Edit</th>
@@ -35,13 +39,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var empl in ViewBag.list)
+                                @foreach (var empl in Model)
                                 {
 
                                     <tr>
                                         <td>@empl.Id</td>
                                         <td>@empl.Name</td>
                                         <td>@empl.Desc</td>
+                                        <td>@empl.DateOfBirth</td>
+                                        <td>@empl.YearsOfExperience</td>
+                                        <td>@empl.PhoneNumber</td>
+                                        <td>@empl.DepartmentId</td>
                                         <td>@empl.Created</td>
                                         <td>@empl.Modified</td>
                                         <td><a href="@Url.Action("Edit", "Employee", new {id = empl.Id})" class="">Modify</a></td>

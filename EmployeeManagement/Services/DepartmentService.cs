@@ -43,7 +43,7 @@ namespace EmployeeManagement.Services
 
         public Department GetById(int id)
         {
-            throw new NotImplementedException();
+            return _departmentRepository.GetById(id);
         }
 
         public void Update(Department department)

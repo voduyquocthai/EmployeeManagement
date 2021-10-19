@@ -15,13 +15,11 @@ namespace EmployeeManagement.Controllers
     public class DepartmentController : Controller
     {
         private readonly IDepartmentService _departmentService;
-        
 
         public DepartmentController(IDepartmentService departmentService)
         {
             _departmentService = departmentService;
         }
-
 
         public IActionResult Index()
         {
@@ -74,16 +72,10 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpGet]
-        // [MyCustomFilter]
         public ActionResult Delete(int id)
         {
             _departmentService.Delete(id);
             return RedirectToAction("Index");
         }
     }
-
-    // public class MyCustomFilter: ActionFilterAttribute
-    // {
-    // }
-
 }

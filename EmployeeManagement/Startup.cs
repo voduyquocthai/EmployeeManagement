@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagement.Repositories;
+using EmployeeManagement.Services;
 
 namespace EmployeeManagement
 {
@@ -25,10 +26,14 @@ namespace EmployeeManagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
-
             // 
             services.AddSingleton<IDepartmentRepository, DepartmentRepository>();
+            //
+            services.AddSingleton<IDepartmentService, DepartmentService>();
+            // 
+            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            //
+            services.AddSingleton<IEmployeeService, EmployeeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
