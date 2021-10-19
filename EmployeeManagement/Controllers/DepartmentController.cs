@@ -23,7 +23,6 @@ namespace EmployeeManagement.Controllers
 
         public IActionResult Index()
         {
-
             var departments = _departmentService.GetAll();
             ViewBag.list = departments;
             return View();

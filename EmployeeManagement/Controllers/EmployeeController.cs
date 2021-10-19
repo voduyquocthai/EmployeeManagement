@@ -31,16 +31,16 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult Store(EmployeeViewModel employeeVM)
+        public ActionResult Store(EmployeeViewModel employeeVm)
         {
-            var department = _departmentService.GetById(employeeVM.DepartmentId);
+            var department = _departmentService.GetById(employeeVm.DepartmentId);
             var employee = new Employee()
             {
-                Name = employeeVM.Name,
-                Desc = employeeVM.Desc,
-                DateOfBirth = employeeVM.DateOfBirth,
-                YearsOfExperience = employeeVM.YearsOfExperience,
-                PhoneNumber = employeeVM.PhoneNumber,
+                Name = employeeVm.Name,
+                Desc = employeeVm.Desc,
+                DateOfBirth = employeeVm.DateOfBirth,
+                YearsOfExperience = employeeVm.YearsOfExperience,
+                PhoneNumber = employeeVm.PhoneNumber,
                 Department = department,
             };
             if (ModelState.IsValid)
@@ -60,16 +60,27 @@ namespace EmployeeManagement.Controllers
         public ActionResult Edit(int id)
         {
             var employee = _employeeService.GetById(id);
-            return View(employee);
+            var employeeVm = new EmployeeViewModel()
+            {
+                Id = employee.Id,
+                Name = employee.Name,
+                Created = employee.Created,
+                Modified = employee.Modified,
+                Desc = employee.Desc,
+                DateOfBirth = employee.DateOfBirth,
+                YearsOfExperience = employee.YearsOfExperience,
+                PhoneNumber = employee.PhoneNumber,
+                DepartmentId = employee.Department.Id,
+            };
+            return View(employeeVm);
         }
 
         [HttpPost]
-        // [MyCustomFilter]
-        public ActionResult Edit(Employee employee)
+        public ActionResult Edit(EmployeeViewModel employeeVM)
         {
             if (ModelState.IsValid)
             {
-                _employeeService.Update(employee);
+                // _employeeService.Update(employee);
                 return RedirectToAction("Index");
             }
             ViewBag.message = "Edit Failed !";
