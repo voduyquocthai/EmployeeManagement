@@ -1,4 +1,4 @@
-﻿@model object
+﻿@model System.Collections.Generic.IList<EmployeeManagement.Models.Employee>
 
 @{
     Layout = null;
@@ -7,12 +7,54 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
-    <title>title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Departments</title>
 </head>
 <body>
-<div>
-      
-</div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">
+                        List Posts
+                        <a href="@Url.Action("Store", "Employee")" class="btn btn-success">Add</a>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Desc</th>
+                                    <th>Created_at</th>
+                                    <th>Updated_at</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var empl in ViewBag.list)
+                                {
+
+                                    <tr>
+                                        <td>@empl.Id</td>
+                                        <td>@empl.Name</td>
+                                        <td>@empl.Desc</td>
+                                        <td>@empl.Created</td>
+                                        <td>@empl.Modified</td>
+                                        <td><a href="@Url.Action("Edit", "Employee", new {id = empl.Id})" class="">Modify</a></td>
+                                        <td><a href="@Url.Action("Delete", "Employee", new {id = empl.Id})" class="">Remove</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

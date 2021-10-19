@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagement.Models;
 using EmployeeManagement.Repositories;
+using EmployeeManagement.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -13,18 +14,19 @@ namespace EmployeeManagement.Controllers
 {
     public class DepartmentController : Controller
     {
-        private readonly IDepartmentRepository _departmentRepository;
+        private readonly IDepartmentService _departmentService;
+        
 
-        public DepartmentController(IDepartmentRepository departmentRepository)
+        public DepartmentController(IDepartmentService departmentService)
         {
-            _departmentRepository = departmentRepository;
+            _departmentService = departmentService;
         }
 
 
         public IActionResult Index()
         {
 
-            var departments = _departmentRepository.GetAll();
+            var departments = _departmentService.GetAll();
             ViewBag.list = departments;
             return View();
         }
@@ -39,26 +41,21 @@ namespace EmployeeManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                var count = _departmentRepository.SearchByName(department);
-                    
-                if (count != 0)
+                Boolean success = _departmentService.Add(department);
+                if (!success)
                 {
                     ViewBag.message = "This department already existing";
                     return View();
                 }
-                department.Created = DateTime.Now;
-                department.Modified = DateTime.Now;
-                _departmentRepository.Insert(department);
                 return RedirectToAction("Index");
             }
-
             ViewBag.message = "Insert Failed !";
             return View();
         }
 
         public ActionResult Edit(int id)
         {
-            var department = _departmentRepository.GetById(id);
+            var department = _departmentService.GetById(id);
             return View(department);
         }
 
@@ -68,11 +65,7 @@ namespace EmployeeManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existDepartment = _departmentRepository.GetById(department.Id);
-                existDepartment.Name = department.Name;
-                existDepartment.Desc = department.Desc;
-                existDepartment.ParentId = department.ParentId;
-                existDepartment.Modified = DateTime.Now;
+                _departmentService.Update(department);
                 return RedirectToAction("Index");
             }
 
@@ -84,16 +77,10 @@ namespace EmployeeManagement.Controllers
         // [MyCustomFilter]
         public ActionResult Delete(int id)
         {
-            var department = _departmentRepository.GetById(id);
-            if (department != null)
-            {
-                _departmentRepository.Delete(department);
-            }
-
+            _departmentService.Delete(id);
             return RedirectToAction("Index");
         }
     }
-
 
     // public class MyCustomFilter: ActionFilterAttribute
     // {

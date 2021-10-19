@@ -1,4 +1,6 @@
-﻿using EmployeeManagement.Repositories;
+﻿using System;
+using EmployeeManagement.Models;
+using EmployeeManagement.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagement.Controllers
@@ -18,5 +20,29 @@ namespace EmployeeManagement.Controllers
             ViewBag.list = employees;
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Store(Employee employee)
+        {
+            if (ModelState.IsValid)
+            {
+                var count = _employeeRepository.SearchByName(employee);
+
+                if (count != 0)
+                {
+                    ViewBag.message = "This department already existing";
+                    return View();
+                }
+                employee.Created = DateTime.Now;
+                employee.Modified = DateTime.Now;
+                _employeeRepository.Insert(employee);
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.message = "Insert Failed !";
+            return View();
+        }
+
+
     }
 }
