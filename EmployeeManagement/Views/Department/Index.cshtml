@@ -41,7 +41,7 @@
 
                             <tr>
                                 <td>@dpt.Id</td>
-                                <td>@dpt.Name</td>
+                                <td><a href="@Url.Action("Detail", "Department", new {id = dpt.Id})" class="">@dpt.Name</a></td>
                                 <td>@dpt.Desc</td>
                                 <td>@dpt.ParentId</td>
                                 <td>@dpt.Created</td>

@@ -52,7 +52,6 @@ namespace EmployeeManagement.Services
             existEmployee.PhoneNumber = employee.PhoneNumber;
             existEmployee.Department = employee.Department;
             existEmployee.Modified = DateTime.Now;
-            existEmployee.DepartmentId = employee.DepartmentId;
         }
 
         public void Delete(int id)

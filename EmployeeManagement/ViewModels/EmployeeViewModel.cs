@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+using EmployeeManagement.Models;
 
-namespace EmployeeManagement.Models
+namespace EmployeeManagement.ViewModels
 {
-    public class Employee : ModelBase
+    public class EmployeeViewModel : ModelBase
     {
-
-        public Employee()
-        {
-
-        }
         [Required]
         public string Desc { get; set; }
 
@@ -20,7 +18,7 @@ namespace EmployeeManagement.Models
 
         public string PhoneNumber { get; set; }
 
-        public Department Department { get; set; }
+        public int DepartmentId { get; set; }
 
         public IList<TimeSheet> TimeSheets { get; set; }
     }

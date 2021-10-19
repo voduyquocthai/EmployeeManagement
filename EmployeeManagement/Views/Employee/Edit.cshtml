@@ -20,41 +20,43 @@
                         Edit Post
                     </div>
                     <div class="card-body">
+                        @Html.ActionLink("Show All Employees", "Index", "Employee")
+
                         @using (Html.BeginForm("Edit", "Employee", FormMethod.Post))
                         {@Html.AntiForgeryToken()
-                        @Html.HiddenFor(e => e.Id)
-                        <div class="form-group">
-                            <label>Name</label>
-                            @Html.TextBoxFor(e => e.Name, new { @class = "form-control" })
-                        </div>
-                        <div class="form-group">
-                            <label>Description</label>
-                            @Html.TextBoxFor(e => e.Desc, new { @class = "form-control" })
-                        </div>
+                            @Html.HiddenFor(e => e.Id)
+                            <div class="form-group">
+                                <label>Name</label>
+                                @Html.TextBoxFor(e => e.Name, new {@class = "form-control"})
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                @Html.TextBoxFor(e => e.Desc, new {@class = "form-control"})
+                            </div>
                             <div class="form-group">
                                 <label>DOB</label>
-                                @Html.TextBoxFor(e => e.DateOfBirth, new { @class = "form-control" })
+                                @Html.TextBoxFor(e => e.DateOfBirth, new {@class = "form-control"})
                             </div>
                             <div class="form-group">
                                 <label>Years of EXP</label>
-                                @Html.TextBoxFor(e => e.YearsOfExperience, new { @class = "form-control" })
+                                @Html.TextBoxFor(e => e.YearsOfExperience, new {@class = "form-control"})
                             </div>
                             <div class="form-group">
                                 <label>Phone Number</label>
-                                @Html.TextBoxFor(e => e.PhoneNumber, new { @class = "form-control" })
+                                @Html.TextBoxFor(e => e.PhoneNumber, new {@class = "form-control"})
                             </div>
                             <div class="form-group">
                                 <label>Department</label>
-                                @Html.TextBoxFor(e => e.DepartmentId, new { @class = "form-control" })
+                                @Html.TextBoxFor(e => e.Department.Id, new {@class = "form-control"})
                             </div>
                             <div class="form-group">
-                            <input type="submit" name="submit" value="Update" class="btn btn-success" />
-                            @if (ViewBag.message != "")
-                            {
-                                <span class="badge badge-danger">@ViewBag.message</span>
-                            }
-                        </div>
-                    }
+                                <input type="submit" name="submit" value="Update" class="btn btn-success"/>
+                                @if (ViewBag.message != "")
+                                {
+                                    <span class="badge badge-danger">@ViewBag.message</span>
+                                }
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

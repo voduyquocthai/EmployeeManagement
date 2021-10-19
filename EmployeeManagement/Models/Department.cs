@@ -12,7 +12,5 @@ namespace EmployeeManagement.Models
 
         [Required]
         public string Desc { get; set; }
-
-        public IList<Employee> Employees { get; set; }
     }
 }

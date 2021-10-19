@@ -2,6 +2,7 @@
 using EmployeeManagement.Models;
 using EmployeeManagement.Repositories;
 using EmployeeManagement.Services;
+using EmployeeManagement.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagement.Controllers
@@ -10,9 +11,12 @@ namespace EmployeeManagement.Controllers
     {
         private readonly IEmployeeService _employeeService;
 
-        public EmployeeController(IEmployeeService employeeService)
+        private readonly IDepartmentService _departmentService;
+
+        public EmployeeController(IEmployeeService employeeService, IDepartmentService departmentService)
         {
             _employeeService = employeeService;
+            _departmentService = departmentService;
         }
         public IActionResult Index()
         {
@@ -22,12 +26,23 @@ namespace EmployeeManagement.Controllers
 
         public ActionResult Store()
         {
+            ViewBag.Departments = _departmentService.GetAll();
             return View();
         }
 
         [HttpPost]
-        public ActionResult Store(Employee employee)
+        public ActionResult Store(EmployeeViewModel employeeVM)
         {
+            var department = _departmentService.GetById(employeeVM.DepartmentId);
+            var employee = new Employee()
+            {
+                Name = employeeVM.Name,
+                Desc = employeeVM.Desc,
+                DateOfBirth = employeeVM.DateOfBirth,
+                YearsOfExperience = employeeVM.YearsOfExperience,
+                PhoneNumber = employeeVM.PhoneNumber,
+                Department = department,
+            };
             if (ModelState.IsValid)
             {
                 Boolean success = _employeeService.Add(employee);
