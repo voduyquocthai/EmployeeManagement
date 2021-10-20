@@ -1,0 +1,55 @@
+﻿@model EmployeeManagement.ViewModels.TimeSheetViewModel
+
+
+
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>title</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        Edit Post
+                    </div>
+                    <div class="card-body">
+
+                        @using (Html.BeginForm("Edit", "TimeSheet", FormMethod.Post))
+                        {@Html.AntiForgeryToken()
+                        @Html.HiddenFor(t => t.Id)
+                        <div class="form-group">
+                            <label>Date</label>
+                            @Html.TextBoxFor(t => t.Date, new { @class = "form-control" , @type = "date"})
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            @Html.TextAreaFor(t => t.Desc, new { @class = "form-control", @type = "text" })
+                        </div>
+                        <div class="form-group">
+                            <label>Hours Of Work</label>
+                            @Html.TextBoxFor(t => t.HoursOfWork, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Department</label>
+                            @Html.DropDownListFor(t => t.EmployeeId, new SelectList(ViewBag.Employees, "Id", "Name"), "Select a department", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(t => t.EmployeeId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" value="Update" class="btn btn-success" />
+                            @if (ViewBag.message != "")
+                            {
+                                <span class="badge badge-danger">@ViewBag.message</span>
+                            }
+                        </div>
+                    }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

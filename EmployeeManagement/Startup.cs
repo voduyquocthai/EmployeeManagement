@@ -34,6 +34,10 @@ namespace EmployeeManagement
             services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
             //
             services.AddSingleton<IEmployeeService, EmployeeService>();
+            //
+            services.AddSingleton<ITimeSheetRepository, TimeSheetRepository>();
+            //
+            services.AddSingleton<ITimeSheetService, TimeSheetService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

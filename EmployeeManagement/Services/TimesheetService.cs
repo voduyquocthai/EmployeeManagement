@@ -3,34 +3,79 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagement.Models;
+using EmployeeManagement.Repositories;
 
 namespace EmployeeManagement.Services
 {
-    public class TimeSheetService : IGeneralService<TimeSheet>
+
+    public interface ITimeSheetService
     {
-        public IList<TimeSheet> GetAll()
+        public IList<TimeSheet> GetAll();
+
+        public bool Add(TimeSheet timeSheet);
+
+        public TimeSheet GetById(int id);
+
+        public void Update(TimeSheet model);
+
+        public void Delete(int id);
+
+        public List<TimeSheet> GetAllTimeSheetsByEmployeeId(int id);
+    }
+    public class TimeSheetService : ITimeSheetService
+    {
+        private readonly ITimeSheetRepository _timeSheetRepository;
+
+        public TimeSheetService(ITimeSheetRepository timeSheetRepository)
         {
-            throw new NotImplementedException();
+            _timeSheetRepository = timeSheetRepository;
         }
 
-        public Boolean Add(TimeSheet model)
+        public IList<TimeSheet> GetAll()
         {
-            throw new NotImplementedException();
+            return _timeSheetRepository.GetAll();
+        }
+
+        public bool Add(TimeSheet timeSheet)
+        {
+            var identity = _timeSheetRepository.SearchByDateAndEmployee(timeSheet.Date, timeSheet.Employee);
+
+            if (identity != 0)
+            {
+                return false;
+            }
+
+            _timeSheetRepository.Insert(timeSheet);
+            return true;
         }
 
         public TimeSheet GetById(int id)
         {
-            throw new NotImplementedException();
+            return _timeSheetRepository.GetById(id);
         }
 
-        public void Update(TimeSheet model)
+        public void Update(TimeSheet timeSheet)
         {
-            throw new NotImplementedException();
+            var existTimeSheet = _timeSheetRepository.GetById(timeSheet.Id);
+            existTimeSheet.Date = timeSheet.Date;
+            existTimeSheet.Employee = timeSheet.Employee;
+            existTimeSheet.Desc = timeSheet.Desc;
+            existTimeSheet.HoursOfWork = timeSheet.HoursOfWork;
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var timeSheet = _timeSheetRepository.GetById(id);
+            if (timeSheet != null)
+            {
+                _timeSheetRepository.Delete(timeSheet);
+            }
+        }
+
+        public List<TimeSheet> GetAllTimeSheetsByEmployeeId(int id)
+        {
+            var timeSheets = _timeSheetRepository.GetAll();
+            return timeSheets.Where(t => t.Employee.Id == id).ToList();
         }
     }
 }

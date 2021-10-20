@@ -59,8 +59,9 @@ namespace EmployeeManagement.Controllers
 
         public ActionResult Edit(int id)
         {
+            
             var employee = _employeeService.GetById(id);
-            var employeeVm = new EmployeeViewModel()
+            var employeeVm = new EmployeeViewModel
             {
                 Id = employee.Id,
                 Name = employee.Name,
@@ -72,15 +73,26 @@ namespace EmployeeManagement.Controllers
                 PhoneNumber = employee.PhoneNumber,
                 DepartmentId = employee.Department.Id,
             };
+            ViewBag.Departments = _departmentService.GetAll();
             return View(employeeVm);
         }
 
         [HttpPost]
-        public ActionResult Edit(EmployeeViewModel employeeVM)
+        public ActionResult Edit(EmployeeViewModel employeeVm)
         {
+            var employee = _employeeService.GetById(employeeVm.Id);
+            var department = _departmentService.GetById(employeeVm.DepartmentId);
+            employee.Name = employeeVm.Name;
+            employee.Created = employeeVm.Created;
+            employee.Modified = DateTime.Now;
+            employee.Desc = employeeVm.Desc;
+            employee.DateOfBirth = employeeVm.DateOfBirth;
+            employee.Department = department;
+            employee.PhoneNumber = employeeVm.PhoneNumber;
+            employee.YearsOfExperience = employeeVm.YearsOfExperience;
             if (ModelState.IsValid)
             {
-                // _employeeService.Update(employee);
+                _employeeService.Update(employee);
                 return RedirectToAction("Index");
             }
             ViewBag.message = "Edit Failed !";
