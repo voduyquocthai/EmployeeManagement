@@ -17,6 +17,9 @@ namespace EmployeeManagement.Repositories
         void Delete(TimeSheet timeSheet);
     }
 
+
+
+
     public class TimeSheetRepository : ITimeSheetRepository
     {
         protected static IList<TimeSheet> TimeSheets = new List<TimeSheet>();
@@ -36,7 +39,7 @@ namespace EmployeeManagement.Repositories
         public int SearchByDateAndEmployee(DateTime date, Employee employee)
         {
             var searchTimeSheet = TimeSheets.FirstOrDefault(i => i.Date == date && i.Employee == employee);
-            return searchTimeSheet != null ? searchTimeSheet.Id : 0;
+            return searchTimeSheet?.Id ?? 0;
         }
 
         public void Insert(TimeSheet timeSheet)

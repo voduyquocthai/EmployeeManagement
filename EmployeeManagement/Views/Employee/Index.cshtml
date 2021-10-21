@@ -44,7 +44,7 @@
 
                                     <tr>
                                         <td>@empl.Id</td>
-                                        <td>@empl.Name</td>
+                                        <td><a href="@Url.Action("Details", "TimeSheet", new { id = empl.Id})">@empl.Name</a></td>
                                         <td>@empl.Desc</td>
                                         <td>@empl.DateOfBirth</td>
                                         <td>@empl.YearsOfExperience</td>

@@ -25,7 +25,7 @@ namespace EmployeeManagement.Services
 
         public bool Add(Employee employee)
         {
-            var identity = _employeeRepository.SearchByName(employee);
+            var identity = _employeeRepository.SearchByName(employee.Name);
 
             if (identity != 0)
             {

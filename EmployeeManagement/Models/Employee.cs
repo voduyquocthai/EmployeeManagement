@@ -21,7 +21,5 @@ namespace EmployeeManagement.Models
         public string PhoneNumber { get; set; }
 
         public Department Department { get; set; }
-
-        public IList<TimeSheet> TimeSheets { get; set; }
     }
 }

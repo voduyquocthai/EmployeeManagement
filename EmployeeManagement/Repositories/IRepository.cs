@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace EmployeeManagement.Repositories
 {
@@ -6,7 +7,7 @@ namespace EmployeeManagement.Repositories
     {
         IList<TModel> GetAll();
         TModel GetById(int id);
-        int SearchByName(TModel model); 
+        int SearchByName(string name); 
         void Insert(TModel model);
         void Update(TModel model);
         void Delete(TModel model);

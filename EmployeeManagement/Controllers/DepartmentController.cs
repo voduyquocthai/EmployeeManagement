@@ -38,7 +38,7 @@ namespace EmployeeManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                Boolean success = _departmentService.Add(department);
+                var success = _departmentService.Add(department);
                 if (!success)
                 {
                     ViewBag.message = "This department already existing";

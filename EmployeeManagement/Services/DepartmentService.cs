@@ -29,7 +29,7 @@ namespace EmployeeManagement.Services
 
         public Boolean Add(Department department)
         {
-            var identity = _departmentRepository.SearchByName(department);
+            var identity = _departmentRepository.SearchByName(department.Name);
 
             if (identity != 0)
             {
