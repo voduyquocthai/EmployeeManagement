@@ -8,9 +8,15 @@ namespace EmployeeManagement.Repositories
 {
     public abstract class AbstractRepository<TModel> : IRepository<TModel> where TModel : ModelBase
     {
+
         protected static IList<TModel> Models = new List<TModel>();
 
-        public static int counter = 1;
+        private readonly IIdGenerator _generator;
+
+        protected AbstractRepository(IIdGenerator generator)
+        {
+            _generator = generator;
+        }
 
         public IList<TModel> GetAll()
         {
@@ -22,16 +28,15 @@ namespace EmployeeManagement.Repositories
             return Models.FirstOrDefault(i => i.Id == id);
         }
 
-        public int SearchByName(TModel model)
+        public int SearchByName(string name)
         {
-            var searchModel = Models.FirstOrDefault(i => i.Name == model.Name);
-            return searchModel != null ? searchModel.Id : 0;
+            var searchModel = Models.FirstOrDefault(i => i.Name == name);
+            return searchModel?.Id ?? 0;
         }
 
         public void Insert(TModel model)
         {
-            model.Id = counter;
-            counter++;
+            model.Id = _generator.GenId();
             Models.Add(model);
         }
 

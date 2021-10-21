@@ -1,14 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using EmployeeManagement.Models;
-using EmployeeManagement.Repositories;
 using EmployeeManagement.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace EmployeeManagement.Controllers
 {
@@ -38,7 +30,7 @@ namespace EmployeeManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                Boolean success = _departmentService.Add(department);
+                var success = _departmentService.Add(department);
                 if (!success)
                 {
                     ViewBag.message = "This department already existing";
@@ -75,6 +67,12 @@ namespace EmployeeManagement.Controllers
         {
             _departmentService.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult TopThreeDepartment()
+        {
+            var result = _departmentService.GetTopThreeLargestDepartments();
+            return View(result);
         }
     }
 }

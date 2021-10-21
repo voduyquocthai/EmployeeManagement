@@ -20,10 +20,11 @@
 
                         @using (Html.BeginForm("Store", "Employee", FormMethod.Post))
                         {
-                            <div class="form-group">
-                                <label>Name</label>
-                                @Html.TextBoxFor(e => e.Name, new { @class = "form-control", @placeholder = "" })
-                            </div>
+                        <div class="form-group">
+                            <label>Name</label>
+                            @Html.TextBoxFor(e => e.Name, new { @class = "form-control", @placeholder = "" })
+                            @Html.ValidationMessageFor(e => e.Name, "", new { @class = "text-danger" })
+                        </div>
                             <div class="form-group">
                                 <label>Description</label>
                                 @Html.TextBoxFor(e => e.Desc, new { @class = "form-control", @placeholder = "" })
@@ -35,10 +36,12 @@
                             <div class="form-group">
                                 <label>Years of EXP</label>
                                 @Html.TextBoxFor(e => e.YearsOfExperience, new { @class = "form-control", @placeholder = "" })
+                                @Html.ValidationMessageFor(e => e.YearsOfExperience, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <label>Phone Number</label>
                                 @Html.TextBoxFor(e => e.PhoneNumber, new { @class = "form-control", @placeholder = "" })
+                                @Html.ValidationMessageFor(e => e.PhoneNumber, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <label>Department</label>

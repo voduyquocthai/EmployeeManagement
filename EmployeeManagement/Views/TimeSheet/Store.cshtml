@@ -1,15 +1,9 @@
-﻿@model EmployeeManagement.Models.Department;
-
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
+﻿@model EmployeeManagement.ViewModels.TimeSheetViewModel;
 
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Add Department</title>
+    <title>Add Employee</title>
 </head>
 <body>
     <div class="container">
@@ -17,23 +11,28 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        Add Department
+                        Add Employee
                     </div>
                     <div class="card-body">
-                        @using (Html.BeginForm("Store", "Department", FormMethod.Post))
+
+                        @using (Html.BeginForm("Store", "TimeSheet", FormMethod.Post))
                         {
-                        <div class="form-group">
-                            <label>Tittle</label>
-                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "" })
-                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
-                        </div>
                             <div class="form-group">
-                                <label>Description</label>
-                                @Html.TextBoxFor(m => m.Desc, new { @class = "form-control", @placeholder = "" })
+                                <label>Date</label>
+                                @Html.TextBoxFor(t => t.Date, new { @class = "form-control", @placeholder = "", @type = "date" })
                             </div>
                             <div class="form-group">
-                                <label>ParentId</label>
-                                @Html.TextBoxFor(m => m.ParentId, new { @class = "form-control", @placeholder = "" })
+                                <label>Description</label>
+                                @Html.TextBoxFor(t => t.Desc, new { @class = "form-control", @placeholder = ""})
+                            </div>
+                            <div class="form-group">
+                                <label>Hours Of Work</label>
+                                @Html.TextBoxFor(t => t.HoursOfWork, new { @class = "form-control", @placeholder = "" })
+                            </div>
+                            <div class="form-group">
+                                <label>Employee</label>
+                                @Html.DropDownListFor(t => t.EmployeeId, new SelectList(ViewBag.Employees, "Id", "Name"), "Select a employee", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(t => t.EmployeeId, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <input type="submit" name="submit" value="Add Post" class="btn btn-success" />

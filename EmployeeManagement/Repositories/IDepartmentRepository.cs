@@ -11,6 +11,8 @@ namespace EmployeeManagement.Repositories
 
     public class DepartmentRepository : AbstractRepository<Department>, IDepartmentRepository
     {
-
+        public DepartmentRepository(IIdGenerator generator) : base(generator)
+        {
+        }
     }
 }

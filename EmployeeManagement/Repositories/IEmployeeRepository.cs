@@ -9,6 +9,8 @@ namespace EmployeeManagement.Repositories
 
     public class EmployeeRepository : AbstractRepository<Employee>, IEmployeeRepository
     {
-
+        public EmployeeRepository(IIdGenerator generator) : base(generator)
+        {
+        }
     }
 }
