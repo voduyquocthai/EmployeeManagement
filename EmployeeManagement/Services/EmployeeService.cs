@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Threading.Tasks;
 using EmployeeManagement.Models;
 using EmployeeManagement.Repositories;
 using EmployeeManagement.ViewModels;
@@ -86,11 +84,6 @@ namespace EmployeeManagement.Services
         }
 
         public List<Employee> GetAllEmployeesMoreThan5YearsExperience()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Employee> GetAllEmployeesFrom5YearsExperience()
         {
             var employees = _employeeRepository.GetAll();
             var list = employees.Where(i => i.YearsOfExperience >= 5).ToList();
