@@ -4,22 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagement.Models;
 using EmployeeManagement.Repositories;
+using EmployeeManagement.ViewModels;
 
 namespace EmployeeManagement.Services
 {
-
-    public interface IDepartmentService : IGeneralService<Department>
-    {
-    }
-
     public class DepartmentService : IDepartmentService
     {
 
         private readonly IDepartmentRepository _departmentRepository;
+        private readonly IEmployeeRepository _employeeRepository;
 
-        public DepartmentService(IDepartmentRepository departmentRepository)
+        public DepartmentService(IDepartmentRepository departmentRepository, IEmployeeRepository employeeRepository)
         {
             _departmentRepository = departmentRepository;
+            _employeeRepository = employeeRepository;
         }
 
         public IList<Department> GetAll()
@@ -63,6 +61,26 @@ namespace EmployeeManagement.Services
             {
                 _departmentRepository.Delete(department);
             }
+        }
+
+        public List<DepartmentViewModel> GetTopThreeLargestDepartments()
+        {
+            var departments = _departmentRepository.GetAll();
+            var employees = _employeeRepository.GetAll();
+            var list =
+                from d in departments
+                join e in employees on d.Id equals e.Department.Id
+                group e by e.Department.Id
+                into g
+                select new DepartmentViewModel
+                {
+                    Id = g.First().Department.Id,
+                    Name = g.First().Department.Name,
+                    Desc = g.First().Department.Desc,
+                    NumberOfEmployees = g.Count()
+                };
+            var result = list.OrderByDescending(i => i.NumberOfEmployees).ToList().GetRange(0, 3);
+            return result;
         }
     }
 }

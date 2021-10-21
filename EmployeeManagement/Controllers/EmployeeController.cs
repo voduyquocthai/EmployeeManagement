@@ -106,5 +106,17 @@ namespace EmployeeManagement.Controllers
             _employeeService.Delete(id);
             return RedirectToAction("Index");
         }
+
+        public ActionResult TopThreeEmployee()
+        {
+            var result = _employeeService.GetTopThreeHardWorkingEmployees();
+            return View(result);
+        }
+
+        public ActionResult GetAllFromFiveYearsExp()
+        {
+            var result = _employeeService.GetAllEmployeesMoreThan5YearsExperience();
+            return View(result);
+        }
     }
 }

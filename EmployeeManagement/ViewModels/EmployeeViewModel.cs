@@ -14,11 +14,15 @@ namespace EmployeeManagement.ViewModels
 
         public string DateOfBirth { get; set; }
 
-        public string YearsOfExperience { get; set; }
+        public int YearsOfExperience { get; set; }
 
         public string PhoneNumber { get; set; }
 
         public int DepartmentId { get; set; }
+
+        public string DepartmentName { get; set; }
+
+        public int TotalHoursOfWork { get; set; }
 
         public IList<TimeSheet> TimeSheets { get; set; }
     }

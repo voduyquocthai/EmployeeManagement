@@ -22,10 +22,11 @@
                     <div class="card-body">
                         @using (Html.BeginForm("Store", "Department", FormMethod.Post))
                         {
-                            <div class="form-group">
-                                <label>Tittle</label>
-                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "" })
-                            </div>
+                        <div class="form-group">
+                            <label>Tittle</label>
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "" })
+                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                        </div>
                             <div class="form-group">
                                 <label>Description</label>
                                 @Html.TextBoxFor(m => m.Desc, new { @class = "form-control", @placeholder = "" })

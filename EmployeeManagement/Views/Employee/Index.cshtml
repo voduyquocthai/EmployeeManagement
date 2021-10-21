@@ -4,13 +4,13 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
+
 
 <html>
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Departments</title>
+    <title>Employees</title>
 </head>
 <body>
     <div class="container">
@@ -18,8 +18,9 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        List Posts
+                        List All Employees
                         <a href="@Url.Action("Store", "Employee")" class="btn btn-success">Add</a>
+                        <a href="@Url.Action("TopThreeEmployee", "Employee")" class="btn btn-success">Top 3 Hard-Working Employee In Current Month</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">

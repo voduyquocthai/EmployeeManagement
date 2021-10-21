@@ -1,16 +1,16 @@
-﻿@model System.Collections.Generic.List<EmployeeManagement.Models.TimeSheet>
+﻿@model System.Collections.Generic.List<EmployeeManagement.ViewModels.EmployeeViewModel>
 
 @{
     Layout = null;
 }
 
-
+<!DOCTYPE html>
 
 <html>
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Time Sheet Management</title>
+    <title>Employee Report</title>
 </head>
 <body>
     <div class="container">
@@ -18,34 +18,28 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        Time Sheet Management
+                        Top Three Most Hard-Working Employee In Current Month
                         <a href="@Url.Action("Index", "Employee")" class="btn btn-success">Back</a>
-                        <a href="@Url.Action("Store", "TimeSheet")" class="btn btn-success">Add</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Employee</th>
-                                    <th>Date</th>
-                                    <th>Description</th>
-                                    <th>Hours Of Work</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th>Name</th>
+                                    <th>Total Working Hours</th>
+                                    <th>Department</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var tsh in Model)
+                                @foreach (var e in Model)
                                 {
+
                                     <tr>
-                                        <td>@tsh.Id</td>
-                                        <td>@tsh.Employee.Name</td>
-                                        <td>@tsh.Date</td>
-                                        <td>@tsh.Desc</td>
-                                        <td>@tsh.HoursOfWork</td>
-                                        <td><a href="@Url.Action("Edit", "TimeSheet", new {id = tsh.Id})" class="">Modify</a></td>
-                                        <td><a href="@Url.Action("Delete", "TimeSheet", new {id = tsh.Id})" class="">Remove</a></td>
+                                        <td>@e.Id</td>
+                                        <td><a href="@Url.Action("Details", "TimeSheet", new { id = e.Id})">@e.Name</a></td>
+                                        <td>@e.TotalHoursOfWork</td>
+                                        <td>@e.DepartmentName</td>
                                     </tr>
                                 }
                             </tbody>
