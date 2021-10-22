@@ -45,6 +45,7 @@ namespace EmployeeManagement.Controllers
                 var success = _timeSheetService.Add(timeSheet);
                 if (success) return RedirectToAction("Details", new { id = employee.Id });
                 ViewBag.message = "There's error during adding Time Sheet";
+                ViewBag.Employees = _employeeService.GetAll();
                 return View();
             }
             ViewBag.message = "Insert Failed !";
@@ -81,6 +82,7 @@ namespace EmployeeManagement.Controllers
                 _timeSheetService.Update(timeSheet);
                 return RedirectToAction("Details", new { id = employee.Id });
             }
+            ViewBag.Employees = _employeeService.GetAll();
             ViewBag.message = "Edit Failed !";
             return View();
         }

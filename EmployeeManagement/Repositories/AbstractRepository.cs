@@ -40,18 +40,6 @@ namespace EmployeeManagement.Repositories
             Models.Add(model);
         }
 
-        public void Update(TModel model)
-        {
-            var existingModel = Models.FirstOrDefault(i => i.Id == model.Id);
-
-            if (existingModel != null)
-            {
-                var index = Models.IndexOf(existingModel);
-
-                Models[index] = model;
-            }
-        }
-
         public void Delete(TModel model)
         {
             Models.Remove(model);

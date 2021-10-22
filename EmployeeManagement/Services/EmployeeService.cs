@@ -87,11 +87,6 @@ namespace EmployeeManagement.Services
 
         public List<Employee> GetAllEmployeesMoreThan5YearsExperience()
         {
-            throw new NotImplementedException();
-        }
-
-        public List<Employee> GetAllEmployeesFrom5YearsExperience()
-        {
             var employees = _employeeRepository.GetAll();
             var list = employees.Where(i => i.YearsOfExperience >= 5).ToList();
             return list;

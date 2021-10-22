@@ -49,11 +49,13 @@ namespace EmployeeManagement.Controllers
                 Boolean success = _employeeService.Add(employee);
                 if (!success)
                 {
+                    ViewBag.Departments = _departmentService.GetAll();
                     ViewBag.message = "This department already existing";
                     return View();
                 }
                 return RedirectToAction("Index");
             }
+            ViewBag.Departments = _departmentService.GetAll();
             ViewBag.message = "Insert Failed !";
             return View();
         }

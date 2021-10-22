@@ -38,7 +38,7 @@ namespace EmployeeManagement.Repositories
 
         public int SearchByDateAndEmployee(DateTime date, Employee employee)
         {
-            var searchTimeSheet = TimeSheets.FirstOrDefault(i => i.Date == date && i.Employee == employee);
+            var searchTimeSheet = TimeSheets.FirstOrDefault(i => i.Date == date && i.Employee.Id == employee.Id);
             return searchTimeSheet?.Id ?? 0;
         }
 

@@ -9,7 +9,6 @@ namespace EmployeeManagement.Repositories
         TModel GetById(int id);
         int SearchByName(string name); 
         void Insert(TModel model);
-        void Update(TModel model);
         void Delete(TModel model);
     }
 }

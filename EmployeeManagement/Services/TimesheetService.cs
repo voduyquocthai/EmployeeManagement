@@ -29,7 +29,6 @@ namespace EmployeeManagement.Services
             {
                 return false;
             }
-
             _timeSheetRepository.Insert(timeSheet);
             return true;
         }
@@ -42,6 +41,7 @@ namespace EmployeeManagement.Services
         public void Update(TimeSheet timeSheet)
         {
             var existTimeSheet = _timeSheetRepository.GetById(timeSheet.Id);
+            if (existTimeSheet == null) return;
             existTimeSheet.Date = timeSheet.Date;
             existTimeSheet.Employee = timeSheet.Employee;
             existTimeSheet.Desc = timeSheet.Desc;
@@ -60,7 +60,7 @@ namespace EmployeeManagement.Services
         public List<TimeSheet> GetAllTimeSheetsByEmployeeId(int id)
         {
             var timeSheets = _timeSheetRepository.GetAll();
-            return timeSheets.Where(t => t.Employee.Id == id).ToList();
+            return timeSheets.Count != 0 ? timeSheets.Where(t => t.Employee.Id == id).ToList() : timeSheets.ToList();
         }
     }
 }
