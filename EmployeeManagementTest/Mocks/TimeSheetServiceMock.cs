@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using EmployeeManagement.Models;
+﻿using EmployeeManagement.Models;
 using EmployeeManagement.Services;
 using Moq;
 
-namespace EmployeeManagementTest
+namespace EmployeeManagementTest.Mocks
 {
     class TimeSheetServiceMock : Mock<ITimeSheetService>
     {

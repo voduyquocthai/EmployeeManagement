@@ -3,7 +3,7 @@ using EmployeeManagement.Models;
 using EmployeeManagement.Services;
 using Moq;
 
-namespace EmployeeManagementTest
+namespace EmployeeManagementTest.Mocks
 {
     class EmployeeServiceMock : Mock<IEmployeeService>
     {

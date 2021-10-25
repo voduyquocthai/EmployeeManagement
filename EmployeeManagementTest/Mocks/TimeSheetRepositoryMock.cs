@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using EmployeeManagement.Models;
 using EmployeeManagement.Repositories;
 using Moq;
-using Xunit.Sdk;
 
-namespace EmployeeManagementTest
+namespace EmployeeManagementTest.Mocks
 {
     public class TimeSheetRepositoryMock : Mock<ITimeSheetRepository>
     {

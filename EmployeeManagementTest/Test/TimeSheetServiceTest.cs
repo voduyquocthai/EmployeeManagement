@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using EmployeeManagement.Models;
-using EmployeeManagement.Repositories;
 using EmployeeManagement.Services;
+using EmployeeManagementTest.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Xunit;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace EmployeeManagementTest
+namespace EmployeeManagementTest.Test
 {
     [TestClass]
     public class TimeSheetServiceTest
