@@ -4,7 +4,7 @@ using Moq;
 
 namespace EmployeeManagementTest.Mocks
 {
-    class TimeSheetServiceMock : Mock<ITimeSheetService>
+    public class TimeSheetServiceMock : Mock<ITimeSheetService>
     {
         public TimeSheetServiceMock MockAdd(bool result)
         {

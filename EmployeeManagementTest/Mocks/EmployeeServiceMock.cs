@@ -5,7 +5,7 @@ using Moq;
 
 namespace EmployeeManagementTest.Mocks
 {
-    class EmployeeServiceMock : Mock<IEmployeeService>
+    public class EmployeeServiceMock : Mock<IEmployeeService>
     {
 
         public EmployeeServiceMock MockGetAll(List<Employee> result)
